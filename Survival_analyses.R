@@ -45,7 +45,7 @@
   #create a table to collect Cox results from 
   collect <- data.frame(matrix(ncol=19, nrow=length(cgs)))
   colnames(collect) <- 
-  c("CpG_name", "M1_variables", "M2_variables", "M2_variables", "M4_variables", 
+  c("CpG_name", "M1_variables", "M2_variables", "M3_variables", "M4_variables", 
   "M1_CpG_P", "M1_CpG_HR", "M1_CpG_HR95_low", "M1_CpG_HR95_up", 
   "M2_CpG_P", "M2_CpG_HR", "M2_CpG_HR95_low", "M2_CpG_HR95_up", 
   "M4_CpG_P", "M4_CpG_HR", "M4_CpG_HR95_low", "M4_CpG_HR95_up",
@@ -127,7 +127,7 @@ write.table(collect, file="cox_results_all_modes.txt", quote = FALSE, sep="\t", 
 CG <- "this is the CpG studied"
 fit3 <- coxph(Surv(data$time_to_esrd_from_visit, data$get_esrd) ~ SEX + AGE + AGEONSET + SBP + hba1c + TG + LASER + CURRENTSMOKER + Bcell + Mono + CD4T + CD8T + Gran + NK, data = data) 
 fit4 <- coxph(Surv(data$time_to_esrd_from_visit, data$get_esrd) ~ dataS[,CG] + SEX + AGE + AGEONSET + SBP + hba1c + TG + LASER + CURRENTSMOKER + Bcell + Mono + CD4T + CD8T + Gran + NK, data = data)
-ctest <- concordance(fit1, fit2)
+ctest <- concordance(fit3, fit4)
 contr <- c(-1, 1)
 dtest <- contr %*% coef(ctest)
 dtest <- contr %*% coef(ctest)
